@@ -19,7 +19,10 @@ const config: Config = {
   },
   plugins: [
     nextui(),
-    daisyui
+    daisyui 
   ],
+  daisyui: {
+    themes: [ "retro", "coffee" ]
+  }
 };
 export default config;
