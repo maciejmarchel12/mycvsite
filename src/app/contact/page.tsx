@@ -1,7 +1,8 @@
-// src/app/contact/page.tsx
-'use client'; // Mark this component as a client component
+'use client';
 
 import { useState } from 'react';
+import emailjs from 'emailjs-com';
+import Image from 'next/image';
 
 export default function Contact() {
     const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -14,27 +15,28 @@ export default function Contact() {
         });
     };
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        const response = await fetch('/api/sendEmail', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-        });
+        // Prepare the data to send, map the form fields to EmailJS fields
+        const emailData = {
+            from_name: formData.name,
+            to_name: 'Maciej Marchel',
+            from_email: formData.email,
+            message: formData.message,
+        };
 
-        if (response.ok) {
-            setStatus('Message sent successfully!');
-            setFormData({ name: '', email: '', message: '' }); // Reset form
-        } else {
-            setStatus('Failed to send message.');
-        }
+        emailjs.send('service_z7v8xxu', 'template_ml5fpst', emailData, 'qLYZD5W6bsKEoWT0L')
+            .then(() => {
+                setStatus('Message sent successfully!');
+                setFormData({ name: '', email: '', message: '' }); // Reset form
+            }, () => {
+                setStatus('Failed to send message.');
+            });
     };
 
     return (
-        <div className="p-6">
+        <div className="p-6 bg-base-200">
             <h1 className="text-2xl mb-4">Contact</h1>
             <form onSubmit={handleSubmit}>
                 <div className="mb-4">
@@ -72,6 +74,33 @@ export default function Contact() {
                 <button type="submit" className="btn btn-primary">Send</button>
             </form>
             {status && <p className="mt-4">{status}</p>}
+
+            {/* Social Media Section */}
+            <div className="mt-12">
+                <h2 className="text-xl mb-4">Check out my social media pages:</h2>
+                <div className="flex space-x-4">
+                    <a href="https://www.linkedin.com/in/maciej-m-marchel/" target="_blank" rel="noopener noreferrer" className="flex items-center">
+                        <Image
+                            src="https://simpleicons.org/icons/linkedin.svg"
+                            alt="LinkedIn"
+                            width={24}  // specify width
+                            height={24} // specify height
+                            className="mr-2"
+                        />
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://github.com/maciejmarchel12" target="_blank" rel="noopener noreferrer" className="flex items-center">
+                        <Image
+                            src="https://simpleicons.org/icons/github.svg"
+                            alt="GitHub"
+                            width={24}  // specify width
+                            height={24} // specify height
+                            className="mr-2"
+                        />
+                        <span>GitHub</span>
+                    </a>
+                </div>
+            </div>
         </div>
     );
 }
