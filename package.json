@@ -13,6 +13,8 @@
     "@nextui-org/react": "^2.4.8",
     "@nextui-org/system": "^2.2.6",
     "@nextui-org/theme": "^2.2.11",
+    "@sendgrid/mail": "^8.1.3",
+    "emailjs-com": "^3.2.0",
     "framer-motion": "^11.11.1",
     "my-cv-site": "file:",
     "next": "14.2.14",
