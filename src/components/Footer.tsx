@@ -12,6 +12,7 @@ export default function Footer() {
                 <Image src="https://simpleicons.org/icons/tailwindcss.svg" alt="Tailwind CSS Logo" width={40} height={40} />
                 <Image src="https://simpleicons.org/icons/daisyui.svg" alt="daisyUI Logo" width={40} height={40} />
                 <Image src="https://simpleicons.org/icons/github.svg" alt="GitHub Logo" width={40} height={40} />
+                <Image src="https://simpleicons.org/icons/typescript.svg" alt="typescript Logo" width={40} height={40} />
             </div>
         </footer>
     );
